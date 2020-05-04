@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class Course(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.title
@@ -13,13 +14,14 @@ class Course(models.Model):
 class UserHasCourse(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    periodicity = models.IntegerField(default=0)
+    periodicity = models.IntegerField()
 
 
 class Lesson(models.Model):
     short_info = models.CharField(max_length=255)
     long_info = models.TextField()
     is_valid = models.BooleanField(default=False)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.short_info

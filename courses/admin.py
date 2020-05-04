@@ -6,4 +6,9 @@ class CourseAdmin(admin.ModelAdmin):
     list_display = ('id', 'title')
 
 
-admin.register(Course, CourseAdmin)
+class LessonAdmin(admin.ModelAdmin):
+    list_display = ('id', 'short_info', 'is_valid', 'course')
+
+
+admin.site.register(Course, CourseAdmin)
+admin.site.register(Lesson, LessonAdmin)
