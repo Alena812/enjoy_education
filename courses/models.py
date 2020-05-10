@@ -24,7 +24,7 @@ class Lesson(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
-        return self.short_info
+        return self.course.title
 
 
 class UserHasLesson(models.Model):
