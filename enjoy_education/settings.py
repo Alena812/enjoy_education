@@ -21,6 +21,31 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 ALLOWED_HOSTS = ['*']
 
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'smmg-pp$2&9p-d7ixcim_7@gdtu=alx*6f4$)xat_4n=kwj39m'
+# import os
+# SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'smmg-pp$2&9p-d7ixcim_7@gdtu=alx*6f4$)xat_4n=kwj39m')
+
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+# DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'enjoy_education',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres1234',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
+
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 # Application definition
 
@@ -33,7 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'django_summernote',
-    # 'cookbook.wsgi.application',
+    'enjoy_education.wsgi.application',
     'rest_framework',
     'corsheaders',
     'rest_framework.authtoken',
@@ -46,6 +71,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',         #
     'django.middleware.common.CommonMiddleware',
@@ -76,6 +102,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'enjoy_education.wsgi.application'
 
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -115,6 +143,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
