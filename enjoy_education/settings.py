@@ -47,6 +47,9 @@ DATABASES = {
 import django_heroku
 django_heroku.settings(locals())
 
+
+
+
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
@@ -75,6 +78,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',         #
     'django.middleware.common.CommonMiddleware',
