@@ -56,3 +56,33 @@ class LessonViewSet(viewsets.ViewSet):
         queryset = Lesson.objects.filter(course__id=course_id).filter(is_valid=True)
         serializer = LessonPostSerializer(queryset, many=True)
         return Response(serializer.data)
+
+
+class EnterToCourseViewSet(viewsets.ViewSet):
+
+    def list(self, request):
+        queryset = UserHasCourse.objects.filter(user=self.request.user)
+        serializer = LessonsSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    """
+    Записаться на курс
+    """
+    def create(self, request):
+        course_id = self.request.GET.get('course_id')
+        periodicity = self.request.GET.get('periodicity')
+        user_has_course = EnterToCourseSerializer(data=request.data)
+        if user_has_course.is_valid():
+            user_has_course.save(course_id=course_id, periodicity=periodicity, user=self.request.user)
+            return Response(status=201)
+        else:
+            return Response(status=400)
+
+    def destroy(self, request, pk):
+        try:
+            queryset = UserHasCourse.objects.all()
+            course = get_object_or_404(queryset, pk=pk)
+            course.delete()
+        except Http404:
+            pass
+        return Response(status=status.HTTP_204_NO_CONTENT)
