@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_my_courses"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_my_courses" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_settings" />
+        <item
+            android:id="@+id/nav_callback"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_callback" />
+        <item
+            android:id="@+id/nav_stat"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_statistic" />
+        <item
+            android:id="@+id/nav_callerror"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_error" />
+        <item
+            android:id="@+id/nav_forum"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_forum" />
+        <item
+            android:id="@+id/nav_update"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_updates" />
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_share" />
+        <item
+            android:id="@+id/nav_import"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_import" />
+    </group>
+</menu>
